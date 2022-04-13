@@ -1,0 +1,12 @@
+Finite State Machine:Finite State Machine are one of the major families of automation.
+Automations are abstract models of simple machine. In finite state machine consists of finite 
+number of state at agiven time only one state is active. Each state is defines which state it
+will transition to as an output based on the sequence of inputs it recieves. The output states 
+becomes the new active state in other words a statetransistion occurs.
+
+>>FSM for Zombie:
+>Idle
+>Wander
+>Chase
+>Attack
+>Dead (final state after that we can do nothing).
