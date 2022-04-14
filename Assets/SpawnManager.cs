@@ -10,7 +10,7 @@ public class SpawnManager : MonoBehaviour
     public int number;
     public float spawnRadius;
     public bool spawnOnStart = true;
-
+    //public GameObject ragDollPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,10 +27,13 @@ public class SpawnManager : MonoBehaviour
         {
 
             Vector3 randomPoint = transform.position + Random.insideUnitSphere * spawnRadius;
+            
             NavMeshHit hit;
             if (NavMesh.SamplePosition(randomPoint, out hit, 10f, NavMesh.AllAreas))
             {
-                Instantiate(zombiePrefabs[0], randomPoint, Quaternion.identity);
+                int r = Random.Range(0, zombiePrefabs.Length);
+                Instantiate(zombiePrefabs[r], randomPoint, Quaternion.identity);
+
             }
             else
                 i--;
@@ -48,6 +51,11 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       /* if (Input.GetKeyUp(KeyCode.R))
+        {
+            Instantiate(ragDollPrefab, this.transform.position, Quaternion.identity);
 
+            return;
+        }*/
     }
 }

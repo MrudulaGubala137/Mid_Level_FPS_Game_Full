@@ -3,24 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+
 public class ZombieController : MonoBehaviour
 {
     Animator anim;
     public GameObject target;
+    public GameObject ragdollPrefab;
     NavMeshAgent agent;
-    AudioSource audio;
+    //udioSource audio;
     public List<AudioClip> audioClips;
     public float walkingSpeed;
     public float runningSpeed;
-    enum STATE { IDLE, WONDER, CHASE, ATTACK, DEAD };
-    STATE state = STATE.IDLE;//default state
+    public enum STATE { IDLE, WONDER, CHASE, ATTACK, DEAD };
+    public STATE state = STATE.IDLE;//default state
     // Start is called before the first frame update
     void Start()
     {
         anim = this.GetComponent<Animator>();
         //anim.SetBool("isWalking", true);
         agent = this.GetComponent<NavMeshAgent>();
-        audio = this.GetComponent<AudioSource>();
+        // audio = this.GetComponent<AudioSource>();
         //.playOnAwake = audioClips[0];
     }
 
@@ -68,6 +70,13 @@ public class ZombieController : MonoBehaviour
             anim.SetBool("isDead", true);
         }*/
 
+        //if (Input.GetKey(KeyCode.R))
+        //{
+        //    GameObject tempRd= Instantiate(ragdollPrefab, this.transform.position, this.transform.rotation);
+        //    tempRd.transform.Find("Hips").GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward * 10000);
+        //    Destroy(this.gameObject);
+        //    return;
+        //}
         if (target == null)
         {
             target = GameObject.FindGameObjectWithTag("Player");
@@ -143,6 +152,10 @@ public class ZombieController : MonoBehaviour
                 break;
 
             case STATE.DEAD:
+
+                //GameObject tempRd = Instantiate(ragdollPrefab, this.transform.position, this.transform.rotation);
+                //tempRd.transform.Find("Hips").GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward * 10000);
+                //Destroy(this.gameObject);
                 break;
 
             default:
@@ -182,5 +195,12 @@ public class ZombieController : MonoBehaviour
         }
         else
             return false;
+    }
+
+    public void KillZombie()
+    {
+        TurnOffAllTriggerAnim();
+        anim.SetBool("isDead", true);
+        state = STATE.DEAD;
     }
 }
