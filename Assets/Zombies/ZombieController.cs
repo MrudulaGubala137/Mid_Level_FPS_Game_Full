@@ -203,4 +203,9 @@ public class ZombieController : MonoBehaviour
         anim.SetBool("isDead", true);
         state = STATE.DEAD;
     }
+    int damageAmount = 5;
+    public void DamagePlayer()
+    {
+        target.GetComponent<PlayerController>().TakeHit(damageAmount);
+    }
 }
