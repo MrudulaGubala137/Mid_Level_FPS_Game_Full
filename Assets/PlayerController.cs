@@ -180,8 +180,4 @@ public class PlayerController : MonoBehaviour
             //Debug.Log("Medical: "+medical);
         }
     }
-    public void TakeHit(float value)
-    {
-
-    }
 }

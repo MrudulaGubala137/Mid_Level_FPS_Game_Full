@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class ZombieController : MonoBehaviour
 {
-    Animator anim;
+    public Animator anim;
     public GameObject target;
     public GameObject ragdollPrefab;
     NavMeshAgent agent;
@@ -113,12 +113,12 @@ public class ZombieController : MonoBehaviour
                 {
                     state = STATE.CHASE;
                 }
-                else if (Random.Range(0, 1000) < 7)
+                /*else if (Random.Range(0, 1000) < 7)
                 {
                     state = STATE.IDLE;
                     TurnOffAllTriggerAnim();
                     agent.ResetPath();
-                }
+                }*/
 
                 break;
 
@@ -144,7 +144,7 @@ public class ZombieController : MonoBehaviour
                 TurnOffAllTriggerAnim();
                 anim.SetBool("isAttacking", true);
                 transform.LookAt(target.transform.position);//Zombies should look at Player
-                if (DistanceToPlayer() > agent.stoppingDistance + 2)
+                if (DistanceToPlayer() > agent.stoppingDistance + 2f)
                 {
                     state = STATE.CHASE;
                 }
@@ -172,7 +172,7 @@ public class ZombieController : MonoBehaviour
 
     public bool CanSeePlayer()
     {
-        if (DistanceToPlayer() < 10)
+        if (DistanceToPlayer() < 10f)
         {
             return true;
         }
@@ -202,10 +202,5 @@ public class ZombieController : MonoBehaviour
         TurnOffAllTriggerAnim();
         anim.SetBool("isDead", true);
         state = STATE.DEAD;
-    }
-    int damageAmount = 5;
-    public void DamagePlayer()
-    {
-        target.GetComponent<PlayerController>().TakeHit(damageAmount);
     }
 }
